@@ -48,3 +48,9 @@ jobs:
     steps:
       - checkout 
       - run: Write-Host "Hello, Windows"
+
+workflows:
+  qa:
+    jobs:
+      - build
+      - windows
