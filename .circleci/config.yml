@@ -20,5 +20,23 @@ jobs:
           name: test ts functions second run 
           command: dagger -m potato functions
       - run:
+          name: test go init 
+          command: dagger init --sdk=go gotato
+      - run:
+          name: test go functions first run 
+          command: dagger -m gotato functions
+      - run:
+          name: test go functions second run 
+          command: dagger -m gotato functions
+      - run:
+          name: test python init 
+          command: dagger init --sdk=go pytato
+      - run:
+          name: test python functions first run 
+          command: dagger -m pytato functions
+      - run:
+          name: test python functions second run 
+          command: dagger -m pytato functions
+      - run:
           name: Stop Dagger Engine
           command: docker stop -t 300 $(docker ps --filter name="dagger-engine-*" -q)
