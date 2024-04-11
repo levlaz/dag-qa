@@ -75,7 +75,7 @@ workflows:
       - build
       - windows
   notify:
-    job:
+    jobs:
       - notify_all:
           filters:
             tags:
