@@ -54,8 +54,31 @@ jobs:
           name: Execute Dagger CLI 
           command: C:\Users\circleci\dagger\dagger.exe version
 
+  notify_all:
+    docker:
+      - image: cimg/go:1.17
+      resource_class: medium 
+      steps:
+        - checkout 
+        - setup_remote_docker:
+            docker_layer_caching: true
+        - run:
+            name: Install Dagger CLI
+            command: cd /usr/local && { curl -L https://dl.dagger.io/dagger/install.sh | sudo sh; cd -; }
+        - run:
+            name: testing interpolation
+            command: echo ${CIRCLE_TAG//\//@}
+            
 workflows:
   qa:
     jobs:
       - build
       - windows
+  notify:
+    job:
+      - notify_all:
+          filters:
+            tags:
+              only: /.*v.*/
+            branches:
+              ignore: /.*/
