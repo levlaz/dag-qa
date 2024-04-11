@@ -47,7 +47,12 @@ jobs:
       shell: "powershell.exe -ExecutionPolicy Bypass"
     steps:
       - checkout 
-      - run: Write-Host "Hello, Windows"
+      - run:
+          name: Install Dagger CLI 
+          command: Invoke-WebRequest -UseBasicParsing -Uri https://dl.dagger.io/dagger/install.ps1 | Invoke-Expression
+      - run:
+          name: Execute Dagger CLI 
+          command: C:\Users\circleci\dagger\dagger.exe version
 
 workflows:
   qa:
