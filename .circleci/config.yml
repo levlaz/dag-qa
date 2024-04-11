@@ -72,7 +72,7 @@ jobs:
       - run:
           name: testing interpolation
           command: |
-            dagger -m github.com/levlaz/${CIRCLE_TAG//\//@} functions
+            dagger -m "github.com/levlaz/${CIRCLE_TAG//\//@}" functions
 
 workflows:
   qa:
