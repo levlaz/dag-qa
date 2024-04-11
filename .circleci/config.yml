@@ -40,3 +40,11 @@ jobs:
       - run:
           name: Stop Dagger Engine
           command: docker stop -t 300 $(docker ps --filter name="dagger-engine-*" -q)
+  windows:
+    resource_class: "windows.medium"
+    machine:
+      image: "windows-server-2022-gui:current"
+      shell: "powershell.exe -ExecutionPolicy Bypass"
+    steps:
+      - checkout 
+      - run: Write-Host "Hello, Windows"
