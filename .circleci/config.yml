@@ -49,6 +49,52 @@ jobs:
       - run:
           name: Stop Dagger Engine
           command: docker stop -t 300 $(docker ps --filter name="dagger-engine-*" -q)
+   sans_cloud:
+    machine:
+      image: default
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: Install Dagger CLI
+          command: cd /usr/local && { curl -L https://dl.dagger.io/dagger/install.sh | sudo sh; cd -; }
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test ts init 
+          command: dagger init --sdk=typescript potato
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test ts functions first run 
+          command: dagger -m potato functions
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test ts functions second run 
+          command: dagger -m potato functions
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test ts functions third run 
+          command: dagger -m potato functions
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test go init 
+          command: dagger init --sdk=go gotato
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test go functions first run 
+          command: dagger -m gotato functions
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test go functions second run 
+          command: dagger -m gotato functions
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test go functions third run 
+          command: dagger -m gotato functions
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test python init 
+          command: dagger init --sdk=go pytato
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test python functions first run 
+          command: dagger -m pytato functions
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test python functions second run 
+          command: dagger -m pytato functions
+      - run:
+          name: unset DAGGER_CLOUD_TOKEN && test python functions third run 
+          command: dagger -m pytato functions
+
   windows:
     resource_class: "windows.medium"
     machine:
@@ -79,6 +125,7 @@ workflows:
   qa:
     jobs:
       - build
+      - sans_cloud
       - windows
   notify:
     jobs:
