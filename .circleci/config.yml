@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Stop Dagger Engine
           command: docker stop -t 300 $(docker ps --filter name="dagger-engine-*" -q)
-   sans_cloud:
+  sans_cloud:
     machine:
       image: default
     resource_class: medium
