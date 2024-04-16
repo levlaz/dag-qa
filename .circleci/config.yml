@@ -20,6 +20,9 @@ jobs:
           name: test ts functions second run 
           command: dagger -m potato functions
       - run:
+          name: test ts functions third run 
+          command: dagger -m potato functions
+      - run:
           name: test go init 
           command: dagger init --sdk=go gotato
       - run:
@@ -29,6 +32,9 @@ jobs:
           name: test go functions second run 
           command: dagger -m gotato functions
       - run:
+          name: test go functions third run 
+          command: dagger -m gotato functions
+      - run:
           name: test python init 
           command: dagger init --sdk=go pytato
       - run:
@@ -36,6 +42,9 @@ jobs:
           command: dagger -m pytato functions
       - run:
           name: test python functions second run 
+          command: dagger -m pytato functions
+      - run:
+          name: test python functions third run 
           command: dagger -m pytato functions
       - run:
           name: Stop Dagger Engine
